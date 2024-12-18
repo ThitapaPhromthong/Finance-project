@@ -66,6 +66,10 @@ function FinanceScreen() {
     }
   }
 
+  const handleEditItem = (record) => {
+    console.log("Editing Record:", record);
+  };
+
   useEffect(() => {
     fetchItems()
   }, [])
@@ -91,7 +95,9 @@ function FinanceScreen() {
           <TransactionList
             data={transactionData}
             onNoteChanged={handleNoteChanged}
-            onRowDeleted={handleRowDeleted} />
+            onRowDeleted={handleRowDeleted} 
+            onEdit={handleEditItem}
+          />
         </Spin>
       </header>
     </div>

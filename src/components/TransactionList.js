@@ -21,7 +21,11 @@ export default function TransactionList(props) {
     {
       title: "Action", key: "action", render: (_, record) => (
         <Space size="middle">
-          
+          <Button
+             type="pimary"
+             shape="circle"
+             onClick={()=> props.onEdit(record)}
+          >Edit</Button>
           <Popconfirm
             title="Delete the transaction"
             description="Are you sure to delete this transaction?"
