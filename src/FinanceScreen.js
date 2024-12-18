@@ -6,13 +6,15 @@ import { Divider } from 'antd';
 import AddItem from './components/AddItem';
 import { Spin, Typography } from 'antd';
 import axios from 'axios'
+import EditItem from './components/EditItem';
 
 const URL_TXACTIONS = '/api/txactions'
 
 function FinanceScreen() {
-  const [summaryAmount, setSummaryAmount] = useState(0);
+  const [summaryAmount, setSummaryAmount] = useState(0)
   const [isLoading, setIsLoading] = useState(false)
   const [transactionData, setTransactionData] = useState([])
+  const [editItem, setEditItem] = useState(null)
 
   const fetchItems = async () => {
     try {
@@ -67,8 +69,25 @@ function FinanceScreen() {
   }
 
   const handleEditItem = (record) => {
-    console.log("Editing Record:", record);
+    setEditItem(record);
   };
+
+  const closeEditModal = () => {
+    setEditItem(null);
+  };
+
+  const updateItem = async (item) => {
+    try {
+      setIsLoading(true);
+      await axios.put(`${URL_TXACTIONS}/${item.id}`, { data: item });
+      fetchItems();
+    } catch (err) {
+      console.log("Error updating item:", err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
 
   useEffect(() => {
     fetchItems()
@@ -81,6 +100,7 @@ function FinanceScreen() {
       ), 0)
     )
   }, [transactionData])
+
 
   return (
     <div className="App">
@@ -95,9 +115,19 @@ function FinanceScreen() {
           <TransactionList
             data={transactionData}
             onNoteChanged={handleNoteChanged}
-            onRowDeleted={handleRowDeleted} 
+            onRowDeleted={handleRowDeleted}
             onEdit={handleEditItem}
           />
+          <EditItem
+            isOpen={editItem !== null}
+            item={editItem}
+            onItemEdited={(updatedItem) => {
+              console.log("Updated Item:", updatedItem);
+              setEditItem(null); 
+            }}
+            onCancel={() => setEditItem(null)}
+          />
+
         </Spin>
       </header>
     </div>
