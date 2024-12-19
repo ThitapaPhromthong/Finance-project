@@ -1,6 +1,5 @@
 import { Modal, Form, Select, Input, InputNumber, Button } from 'antd';
 import { useEffect } from 'react';
-import axios from 'axios';
 
 export default function EditItem({ isOpen, item, onItemEdited, onCancel }) {
   const [form] = Form.useForm();

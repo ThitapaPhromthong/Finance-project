@@ -122,7 +122,7 @@ function FinanceScreen() {
             isOpen={editItem !== null}
             item={editItem}
             onItemEdited={(updatedItem) => {
-              console.log("Updated Item:", updatedItem);
+              updateItem(updatedItem);
               setEditItem(null); 
             }}
             onCancel={() => setEditItem(null)}
