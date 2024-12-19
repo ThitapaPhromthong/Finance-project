@@ -125,7 +125,7 @@ function FinanceScreen() {
               updateItem(updatedItem);
               setEditItem(null); 
             }}
-            onCancel={() => setEditItem(null)}
+            onCancel={closeEditModal}
           />
 
         </Spin>
