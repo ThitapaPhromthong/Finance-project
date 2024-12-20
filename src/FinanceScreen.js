@@ -15,6 +15,7 @@ function FinanceScreen() {
   const [isLoading, setIsLoading] = useState(false)
   const [transactionData, setTransactionData] = useState([])
   const [editItem, setEditItem] = useState(null)
+  const [item, setItem] = useState(null)
 
   const fetchItems = async () => {
     try {
@@ -35,11 +36,11 @@ function FinanceScreen() {
       setIsLoading(true)
       const params = { ...item, action_datetime: dayjs() }
       const response = await axios.post(URL_TXACTIONS, { data: params })
-      const { id, attributes } = response.data.data
+      const { id, attributes } = response.data.data;
       setTransactionData([
         ...transactionData,
         { id: id, key: id, ...attributes }
-      ])
+      ]);
     } catch (err) {
       console.log(err)
     } finally {
@@ -69,6 +70,7 @@ function FinanceScreen() {
   }
 
   const handleEditItem = (record) => {
+    setItem(record)
     setEditItem(record);
   };
 
@@ -76,11 +78,13 @@ function FinanceScreen() {
     setEditItem(null);
   };
 
-  const updateItem = async (item) => {
+  const updateItem = async (itemData) => {
     try {
       setIsLoading(true);
-      await axios.put(`${URL_TXACTIONS}/${item.id}`, { data: item });
+      await axios.put(`${URL_TXACTIONS}/${item.id}`, { data: itemData });
+      setItem(null)
       fetchItems();
+      setEditItem(null);
     } catch (err) {
       console.log("Error updating item:", err);
     } finally {
@@ -121,10 +125,7 @@ function FinanceScreen() {
           <EditItem
             isOpen={editItem !== null}
             item={editItem}
-            onItemEdited={(updatedItem) => {
-              updateItem(updatedItem);
-              setEditItem(null); 
-            }}
+            onItemEdited={updateItem}
             onCancel={closeEditModal}
           />
 
