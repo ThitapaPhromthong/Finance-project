@@ -36,3 +36,73 @@
     transform: rotate(360deg);
   }
 }
+.login-container {
+  font-family: 'Poppins', sans-serif; 
+  background-color: #ffffff;         
+  padding: 30px;                      
+  border-radius: 20px;                
+  border: 2px solid #000;            
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  width: 400px;                       
+  margin: 50px auto;                  
+  position: relative;                
+}
+
+.login-container .login-title {
+  margin-bottom: 20px; 
+}
+
+.login-container .please-login {
+  margin-bottom: 10px; 
+}
+
+.please-login {
+  font-family: 'Poppins', sans-serif; 
+  font-size: 20px;                   
+  font-weight: 600;                  
+  color: #333;                    
+  text-align: center;              
+  background-color: #f0f0f0;        
+  padding: 5px 10px;              
+  border-radius: 15px;              
+  border: 2px solid #000000;        
+  display: inline-block;            
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+}
+
+.login-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 30px;                  
+  font-weight: 600;             
+  color: #fff;                      
+  text-align: center;              
+  background-color: #28a745;         
+  padding: 10px 80px;                
+  border-radius: 15px;              
+  border: 2px solid #000000;                   
+  display: inline-block;           
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+  position: absolute;                
+  top: -30px;                      
+  left: 50%;                         
+  transform: translateX(-50%);       
+  z-index: 10;                       
+}
+
+.login-form {
+  display: flex;                     
+  flex-direction: column;            
+  justify-content: center;            
+  align-items: center;               
+  height: 100%;                     
+}
+
+.login-form .ant-form-item {
+  width: 80%;                         
+  max-width: 300px;                   
+}
+
+.login-form .ant-btn {
+  width: 100%;                        
+  max-width: 100px;                                  
+}

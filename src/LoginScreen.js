@@ -24,36 +24,40 @@ export default function LoginScreen(props) {
   }
 
   return (
-    <Form
-      onFinish={handleLogin}
-      autoComplete="off">
-      {errMsg &&
-        <Form.Item>
-          <Alert message={errMsg} type="error" />
+    <div className="login-container">
+      <div className="login-title">Finance</div>
+      <h2 className="please-login">Please Login</h2>
+      <Form
+        className="login-form"
+        onFinish={handleLogin}
+        autoComplete="off">
+        {errMsg &&
+          <Form.Item>
+            <Alert message={errMsg} type="error" />
+          </Form.Item>
+        }
+        <Form.Item
+          label="Username"
+          name="identifier"
+          rules={[{ required: true, }]}>
+          <Input />
         </Form.Item>
-      }
-      <h2>Please Login</h2>
-      <Form.Item
-        label="Username"
-        name="identifier"
-        rules={[{ required: true, }]}>
-        <Input />
-      </Form.Item>
 
-      <Form.Item
-        label="Password"
-        name="password"
-        rules={[{ required: true },]}>
-        <Input.Password />
-      </Form.Item>
+        <Form.Item
+          label="Password"
+          name="password"
+          rules={[{ required: true },]}>
+          <Input.Password />
+        </Form.Item>
 
-      <Form.Item>
-        <Button
-          type="primary"
-          htmlType="submit" loading={isLoading}>
-          Submit
-        </Button>
-      </Form.Item>
-    </Form>
+        <Form.Item>
+          <Button
+            type="primary"
+            htmlType="submit" loading={isLoading}>
+            Submit
+          </Button>
+        </Form.Item>
+      </Form>
+    </div>
   )
 }
