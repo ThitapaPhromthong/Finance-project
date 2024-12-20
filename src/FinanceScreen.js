@@ -7,6 +7,7 @@ import AddItem from './components/AddItem';
 import { Spin, Typography } from 'antd';
 import axios from 'axios'
 import EditItem from './components/EditItem';
+import GoalsBox from './components/GoalsBox';
 
 const URL_TXACTIONS = '/api/txactions'
 
@@ -113,6 +114,7 @@ function FinanceScreen() {
           <Typography.Title>
             ยอดเงินปัจจุบัน {summaryAmount} บาท
           </Typography.Title>
+          <GoalsBox summaryAmount={summaryAmount} />
 
           <AddItem onItemAdded={handleAddItem} />
           <Divider>บันทึกรายรับ - รายจ่าย</Divider>
