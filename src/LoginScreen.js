@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Button, Form, Input, Alert } from 'antd';
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom';
 
 const URL_AUTH = "/api/auth/local"
 
@@ -8,6 +9,7 @@ export default function LoginScreen(props) {
 
   const [isLoading, setIsLoading] = useState(false)
   const [errMsg, setErrMsg] = useState(null)
+  const navigate = useNavigate();
 
   const handleLogin = async (formData) => {
     try {
@@ -16,6 +18,7 @@ export default function LoginScreen(props) {
       const response = await axios.post(URL_AUTH, { ...formData })
       const token = response.data.jwt
       axios.defaults.headers.common = { 'Authorization': `bearer ${token}` }
+      navigate('/finance');
       props.onLoginSuccess();
     } catch (err) {
       console.log(err)
