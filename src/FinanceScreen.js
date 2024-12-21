@@ -8,6 +8,8 @@ import { Spin, Typography } from 'antd';
 import axios from 'axios'
 import EditItem from './components/EditItem';
 import GoalsBox from './components/GoalsBox';
+import Cookies from 'js-cookie';
+import { Button } from 'antd';
 
 const URL_TXACTIONS = '/api/txactions'
 
@@ -17,6 +19,11 @@ function FinanceScreen() {
   const [transactionData, setTransactionData] = useState([])
   const [editItem, setEditItem] = useState(null)
   const [item, setItem] = useState(null)
+
+  const token = Cookies.get('userToken');
+  if (!token) {
+    window.location.href = '/login';
+  }
 
   const fetchItems = async () => {
     try {
@@ -93,6 +100,11 @@ function FinanceScreen() {
     }
   };
 
+  const handleLogout = () => {
+    Cookies.remove('userToken');
+    window.location.href = '/login';
+  };
+
 
   useEffect(() => {
     fetchItems()
@@ -130,7 +142,9 @@ function FinanceScreen() {
             onItemEdited={updateItem}
             onCancel={closeEditModal}
           />
-
+          <Button type="primary" onClick={handleLogout} style={{ marginBottom: '20px' }}>
+            Logout
+          </Button>
         </Spin>
       </header>
     </div>

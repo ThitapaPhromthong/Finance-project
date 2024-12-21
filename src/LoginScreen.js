@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Button, Form, Input, Alert } from 'antd';
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 const URL_AUTH = "/api/auth/local"
 
@@ -17,6 +18,7 @@ export default function LoginScreen(props) {
       setErrMsg(null)
       const response = await axios.post(URL_AUTH, { ...formData })
       const token = response.data.jwt
+      Cookies.set('userToken', token, { expires: 7 });
       axios.defaults.headers.common = { 'Authorization': `bearer ${token}` }
       navigate('/finance');
       props.onLoginSuccess();
