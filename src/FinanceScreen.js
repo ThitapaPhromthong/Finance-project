@@ -19,6 +19,7 @@ function FinanceScreen() {
   const [transactionData, setTransactionData] = useState([])
   const [editItem, setEditItem] = useState(null)
   const [item, setItem] = useState(null)
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const token = Cookies.get('userToken');
   if (!token) {
@@ -38,6 +39,16 @@ function FinanceScreen() {
       console.log(err)
     } finally { setIsLoading(false) }
   }
+
+  useEffect(() => {
+    const token = Cookies.get('userToken');
+    if (token) {
+      axios.defaults.headers.common = { 'Authorization': `Bearer ${token}` };
+      setIsAuthenticated(true);
+    } else {
+      setIsAuthenticated(false);
+    }
+  }, []);
 
   const handleAddItem = async (item) => {
     try {
